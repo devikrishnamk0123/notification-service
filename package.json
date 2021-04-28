@@ -1,0 +1,51 @@
+{
+  "name": "notification-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build && node build/index.js",
+    "build": "tsc",
+    "dev": "nodemon",
+    "template-migration": "ts-node ./node_modules/typeorm/cli --f ./src/config/database.ts migration:create -n",
+    "migrate": "npx tsc && ts-node ./node_modules/typeorm/cli --f ./src/config/database.ts migration:run",
+    "add-migration": "ts-node ./node_modules/typeorm/cli --f ./src/config/database.ts migration:generate -n"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src"
+    ],
+    "ext": "ts",
+    "exec": "ts-node src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cors": "^2.8.10",
+    "@types/express": "^4.17.11",
+    "@types/morgan": "^1.9.2",
+    "@types/multer": "^1.4.5",
+    "@types/node": "^14.14.37",
+    "@types/swagger-ui-express": "^4.1.2",
+    "concurrently": "^6.0.1",
+    "nodemon": "^2.0.7",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.882.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "envalid": "^7.1.0",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "pg": "^8.5.1",
+    "reflect-metadata": "^0.1.13",
+    "swagger-ui-express": "^4.1.6",
+    "tsoa": "^3.6.1",
+    "typeorm": "^0.2.32",
+    "typeorm-naming-strategies": "^2.0.0"
+  }
+}
