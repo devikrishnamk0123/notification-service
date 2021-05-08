@@ -1,11 +1,17 @@
 FROM node:12
 
-ENV CI=true
+RUN mkdir -p /home/node/app/node_modules
 
-WORKDIR /app
-COPY package.json ./
+WORKDIR /home/node/app
+
+COPY package*.json ./
+
 RUN npm install
+
+COPY . .
+
+EXPOSE 80 8000
+
 RUN npm run build
-COPY ./ ./
-EXPOSE 8000
-CMD ["npm", "start"]
+
+CMD [ "npm", "start" ]
