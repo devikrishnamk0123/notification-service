@@ -17,6 +17,5 @@ jobs:
           aws-region: us-east-2
       - name: Docker Setup Docker
         uses: crazy-max/ghaction-setup-docker@v2.2.0
-      
-
-      
+      - name: docker authenticate with ecr repo
+        run: aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 402338187344.dkr.ecr.us-east-2.amazonaws.com
