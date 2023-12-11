@@ -35,5 +35,12 @@ jobs:
     name: migration-run
     needs: build
     steps:
+        - name: configure aws credentials
+          uses: aws-actions/configure-aws-credentials@v1
+          with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws-region: us-east-2
+                
         - name: run migration as task
           run: aws ecs run-task --cluster $CLUSTER --task-definition arn:aws:ecs:us-east-2:402338187344:task-definition/devi-notification-service-migration-td:1 --region us-east-2 --overrides "{\"containerOverrides\":[{\"name\":\"migration\",\"command\":[\"npm\",\"run\",\"migrate\"]}]}"
