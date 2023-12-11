@@ -1,4 +1,4 @@
-name: ci-cd-pipeline notifcation-service
+name: ci-cd-pipeline file notifcation-service
 on: 
   push:
     branches: 
