@@ -30,3 +30,10 @@ jobs:
         run: docker tag $IMAGE:$TAG 402338187344.dkr.ecr.us-east-2.amazonaws.com/$IMAGE:$TAG
       - name: push docker image
         run: docker push 402338187344.dkr.ecr.us-east-2.amazonaws.com/$IMAGE:$TAG
+  run-migration:
+    runs-on: ubuntu-latest
+    name: migration-run
+    needs: build
+    steps:
+        - name: run migration as task
+          run: aws ecs run-task --cluster $CLUSTER --task-definition arn:aws:ecs:us-east-2:402338187344:task-definition/devi-notification-service-migration-td:1 --region us-east-2 --overrides "{\"containerOverrides\":[{\"name\":\"migration\",\"command\":[\"npm\",\"run\",\"migrate\"]}]}"
